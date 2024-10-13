@@ -1,0 +1,64 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "release": "bash ./scripts/release.sh"
+  },
+  "dependencies": {
+    "@pinia/nuxt": "0.5.5",
+    "axios": "1.7.7",
+    "nuxt": "3.13.0",
+    "pinia": "^2.2.4",
+    "vue": "3.5.12",
+    "vue-router": "4.4.5"
+  },
+  "devDependencies": {
+    "@element-plus/nuxt": "1.0.10",
+    "@release-it/conventional-changelog": "^9.0.0",
+    "release-it": "^17.8.2"
+  },
+  "release-it": {
+    "git": {
+      "commitMessage": "release ${version}"
+    },
+    "npm": {
+      "publish": false
+    },
+    "hooks": {
+      "after:bump": "npm run version:sync"
+    },
+    "plugins": {
+      "@release-it/conventional-changelog": {
+        "infile": "CHANGELOG.md",
+        "ignoreRecommendedBump": true,
+        "preset": {
+          "name": "conventionalcommits",
+          "types": [
+            {
+              "type": "feat",
+              "section": "Features"
+            },
+            {
+              "type": "fix",
+              "section": "Bug Fixes"
+            },
+            {
+              "type": "internal",
+              "section": "Internal"
+            },
+            {
+              "type": "chore",
+              "section": "Internal"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
